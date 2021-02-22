@@ -1,0 +1,64 @@
+clc
+%% графики функций от 1-й переменной
+x = 0:0.01:1;
+y = exp(-x).*sin(x*10);
+%%plot(x,y,'ro-')
+%% y,m,c,g,b,w,k
+%% . o x + * s
+%% - : -. --
+y1 = exp(-x).*sin(2*x);
+plot(x,y,'ro-',x,y1,'g+-')
+time = [0 4 7 9 10 11 12 13 13.5 14 14.5 15 16 17 18 20 22];
+temp1 = [14 15 14 16 18 17 20 22 24 28 25 20 16 13 13 14 13];
+temp2 = [12 13 13 14 16 18 20 20 23 25 25 20 16 12 12 11 10];
+plot(time,temp1,'ro-',time,temp2,'go-')
+grid on
+title('Суточная температура')
+xlabel('время')
+ylabel('температура')
+legend('10 мая','11 мая', 0)
+%% -1 1 2 3 4 
+x1 = -2*pi:pi/30:-pi;
+y1 = pi*sin(x1);
+x2 = -pi:pi/30:pi;
+y2 = pi-abs(x2);
+x3 = pi:pi/30:2*pi;
+y3 = pi*sin(x3).^3;
+x_vse = [x1 x2 x3];
+y_vse = [y1 y2 y3];
+plot(x_vse,y_vse)
+%
+plot(x,y,x_vse,y_vse)
+%% размерность пар должна совпадать
+
+%% графики функций от 2-х переменных
+[X, Y] = meshgrid(-1:0.05:1,0:0.05:1);
+Z = 4*sin(2*pi*X).*cos(1.5*pi*Y).*(1-X.^2).*Y.*(1-Y);
+mesh(X,Y,Z)
+%
+surf(X,Y,Z)
+colorbar
+%
+colormap(cool)
+%
+colormap(hsv)
+
+subplot(3,2,1)
+mesh(X,Y,Z)
+title('mesh')
+subplot(3,2,2)
+surf(X,Y,Z)
+title('surf')
+subplot(3,2,3)
+meshc(X,Y,Z)
+title('meshc')
+subplot(3,2,4)
+surfc(X,Y,Z)
+title('surfc')
+subplot(3,2,5)
+contour3(X,Y,Z)
+title('contour3')
+subplot(3,2,6)
+surfl(X,Y,Z)
+title('surfl')
+%% 3 - кол-во графиков по вертикали, 2 - по горизонтали, третье число - какой из графиков является текущим
