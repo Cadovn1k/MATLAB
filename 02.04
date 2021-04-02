@@ -1,0 +1,80 @@
+close all
+% для формирования графика в полярнных координатах исп-ся polar(fi,ro,s)
+% fi - массив полярынх углов
+% ro - массив значений полярных радиусов точек, образующих графики
+% s - символьная переменная
+fi=0:0.01:2*pi;
+r=5*cos(2-7*fi);
+polar(fi,r,'k--*')
+%%
+close all
+t = 0:0.01:50;
+x=4.*exp(-0.05*t).*sin(t);
+y=0.2.*exp(-0.1*t).*sin(2*t);
+%%plot(x,y)
+comet(x,y)
+%%
+close all
+t=-10*pi:pi/300:10*pi;
+x = (sin(t).^3).*cos(t);
+y = (cos(t).^3).*sin(t);
+comet3(x,y,t)
+%%
+close all
+x=[1 3 7 8 9];
+plot(x)
+bar(x,'r')
+stem(x,'m')
+x=-2.9:0.2:2.9;
+bar(x,exp(-x.^2));
+title('столбцовая диаграмма')
+figure
+y = randn(10000,1)
+hist(y,x)
+title('гистограмма')
+%%
+close all
+time=[0 0.1 0.2 0.3 0.4 0.5];
+data=[1.2 1.3 1.4 1.5 1.6 1.7];
+bar(time,data,0.5,'y')
+t=-1:0.1:1;
+x=sin(t).*exp(t);
+bar(t,x,1)
+figure
+barh(t,x,1)
+figure
+bar3(t,x,1)
+%%
+close all
+data = [19.5 13.4 42.6 7.9];
+pie(data)
+parts=[1 1 1 0];
+pie(data,parts)
+figure
+pie3(data,parts)
+%%
+% subplot(m,n,p) 
+% subplot делит графическое окно m на n частей 
+close all
+t=0:pi/10:2*pi;
+[x,y,z]=cylinder(4*cos(t));
+subplot(2,2,1)
+%mesh(x)
+surf(x)
+subplot(2,2,2)
+%mesh(y)
+surf(y)
+subplot(2,2,3)
+%mesh(z)
+surf(z)
+subplot(2,2,4)
+%mesh(x,y,z)
+surf(x,y,z)
+% axis([xmin xmax ymin y max])
+%%
+close all
+t=-2:0.01:2;
+plot3(cos(2*pi*t),sin(2*pi*t),t)
+
+
+
