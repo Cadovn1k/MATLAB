@@ -1,0 +1,54 @@
+x = read.csv(file = "C:\\Users\\Admin\\Desktop\\Моя прелесть\\TV\\921\\17\\r1z1.csv", 
+             header = TRUE, 
+             sep='\n')
+n = length(x$X) # объем выборки
+min = min(x$X) # минимум 
+max = max(x$X) # максимум
+delta = max - min # размах
+
+# оценка среднего значения
+average = mean(x$X)
+
+# оценка дисперсии
+dispersion = var(x$X)
+
+# оценка смещенной дисперсии
+mixed_dispersion = sum((average - x$X)^2) / n
+
+# оценка несмещенной дисперсии
+unmixed_dispersion = sum((average - x$X)^2) / (n - 1)
+
+# оценка стандартного отклонения
+st_dev = sd(x$X)
+
+# оценка асимметрии
+assymetry = 1 / st_dev^3 * (1 / n * sum(x$X^3) - 3 * average / n * sum(x$X^2) + 2 * average^3)
+
+# оценка медианы
+median = median(x$X)
+
+# квантили
+q12 = sort(x$X)[n/2];
+q14 = sort(x$X)[n/4];
+q34 = sort(x$X)[3*n/4];
+
+# интерквантильная широта
+interqual_width = q34 - q14;
+
+# гистограмма
+hist(x$X,  main = "Гистограмма")
+
+# функция для нахождения моды 
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# оценка моды
+moda = getmode(x$X)
+
+# График эмпирической функции распределения
+#plot(ecdf(x$X), main = "График эмпирической функции распределения")
+xx = rep(sort(x$X))
+plot(xx, (1 : n) / n, type = "S", col = "red", main = "График эмпирической функции распределения")
+
