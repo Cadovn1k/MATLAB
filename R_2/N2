@@ -1,0 +1,27 @@
+x = read.csv(file = "C:\\Users\\Admin\\Desktop\\Моя прелесть\\TV\\921\\17\\r2z2.csv", header = TRUE, sep='\n')
+alpha = 0.1
+x = round(x$X, 8)
+min = min(x)
+max = max(x)
+n = length(x)
+f = sort(x)
+g = pexp(f,2) # Нормальная функция распределения:
+c = {}
+i = 1
+# Эмпирическая функция распределения:
+for (k in f){
+  c[i] = length(x[x < k - 0.001]) / n
+  i = i + 1
+}
+#Критическая область: koef > C
+x1 = sort(x)
+plot( x1, (1 : n) / n, type = "S", xaxp = round(c(min, max, 15), digits = 3), las = 2) # График эфр
+curve( pnorm(x, 1.5), min, max, col = "red", lwd = 3, add = TRUE) # Накладываемый график функции распределения
+Dn = max(abs(c - g)) # Cтатистика
+# Обратная функция распределения Колмогорова при малых alpha
+C = sqrt(-0.5 * log(alpha / 2))
+koef = sqrt(n) * Dn
+p = 1.63 / sqrt(n - 1)
+ks.test(x, "pnorm", 1.5)
+
+
