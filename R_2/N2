@@ -14,13 +14,14 @@ for (k in f){
   i = i + 1
 }
 #Критическая область: koef > C
-x1 = sort(x)
-plot( x1, (1 : n) / n, type = "S", xaxp = round(c(min, max, 15), digits = 3), las = 2) # График эфр
+plot( sort(x), (1 : n) / n, type = "S", xaxp = round(c(min, max, 15), digits = 3), las = 2) # График эфр
 curve( pnorm(x, 1.5), min, max, col = "red", lwd = 3, add = TRUE) # Накладываемый график функции распределения
 Dn = max(abs(c - g)) # Cтатистика
 # Обратная функция распределения Колмогорова при малых alpha
 C = sqrt(-0.5 * log(alpha / 2))
 koef = sqrt(n) * Dn
+"Критерий Колмогорова отклоняет Н0(случайная величина имеет нормальное распределение), если koef > C
+У нас получилось, что koef > C. Значит, мы отклоняем гипотезу Н0."
 p = 1.63 / sqrt(n - 1)
 ks.test(x, "pnorm", 1.5)
 
