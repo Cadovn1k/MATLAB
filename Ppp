@@ -1,0 +1,42 @@
+%%
+\xD                                          ;
+[Cc][Oo][Uu][Nn][Tt]                         { pos += yyleng; printf("COUNT\n"); return yCOUNT; }
+[Ff][Oo][Rr]                                 { pos += yyleng; printf("FOR\n"); return yFOR; }
+[Ww][Hh][Ii][Ll][Ee]                         { pos += yyleng; printf("WHILE\n"); return yWHILE; }
+[Tt][Oo]                                     { pos += yyleng; printf("TO\n"); return yTO; }
+[Nn][Oo][Oo][Pp][Tt][Ii][Mm][Ii][Zz][Ee]     { pos += yyleng; printf("NOOPTIMIZE\n"); return yNOOPTIMIZE; }
+[Aa][Ll][Ll]                                 { pos += yyleng; printf("ALL\n"); return yALL; }
+[Nn][Ee][Xx][Tt]                             { pos += yyleng; printf("NEXT\n"); return yNEXT; }
+[Rr][Ee][Cc][Oo][Rr][Dd]                     { pos += yyleng; printf("RECORD\n"); return yRECORD; }
+[Rr][Ee][Ss][Tt]                             { pos += yyleng; printf("REST\n"); return yREST; }
+","                                          { pos += yyleng; printf("COMMA\n"); return yCOMMA; }
+"+"                                          { pos += yyleng; printf("PLUS\n"); return yPLUS; }
+"-"                                          { pos += yyleng; printf("MINUS\n"); return yMINUS; }
+"*"                                          { pos += yyleng; printf("MULTIPLY\n"); return yMULTIPLY; }
+"/"                                          { pos += yyleng; printf("DIVIDE\n"); return yDIVIDE; }
+"<="                                         { pos += yyleng; printf("LEQ\n"); return yLEQ; }
+">="                                         { pos += yyleng; printf("GEQ\n"); return yGEQ; }
+"<>"|"#"|"!="                                { pos += yyleng; printf("NEQ\n"); return yNEQ; }
+"=="                                         { pos += yyleng; printf("STR_EQ\n"); return ySTR_EQ; }
+"="                                          { pos += yyleng; printf("EQUAL\n"); return yEQUAL; }
+"<"                                          { pos += yyleng; printf("LESS\n"); return yLESS; }
+">"                                          { pos += yyleng; printf("GREATER\n"); return yGREATER; }
+[Aa][Nn][Dd]                                 { pos += yyleng; printf("AND\n"); return yAND; }
+[Oo][Rr]                                     { pos += yyleng; printf("OR\n"); return yOR; }
+[Nn][Oo][Tt]                                 { pos += yyleng; printf("NOT\n"); return yNOT; }
+"("                                          { pos += yyleng; printf("OP\n"); return yOP; }
+")"                                          { pos += yyleng; printf("CP\n"); return yCP; }
+[a-zA-Z][a-zA-Z0-9]*                         { pos += yyleng; printf("IDENTIFIER = %s\n", yytext); yylval.str = strdup(yytext); return yIDENTIFIER; }
+0|([1-9][0-9]*)                              {
+                                                 yylval.num = yytext[0] - '0';
+                                                 int i;
+                                                 for (i = 1; i < yyleng; i++) { yylval.num = yylval.num*10 + (yytext[i] - '0'); } 
+                                                 printf("NUMBER = %d\n", yylval.num); 
+                                                 return yNUMBER;
+                                             }
+;                                            { printf("SEMICOLON\n"); return ySEMICOLON; }
+\n                                           { pos = 0; }
+" "                                          { pos++; }
+[ \t]+                                       ;
+.                                            { pos++; err_cnt++; printf("at line %d, position %d : lexical error: unknown character '%c'\n", yylineno, pos, yytext[0]); }
+%%
