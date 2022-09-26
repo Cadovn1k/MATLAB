@@ -1,5 +1,4 @@
 %%
-\xD                                          ;
 [Cc][Oo][Uu][Nn][Tt]                         { pos += yyleng; printf("COUNT\n"); return yCOUNT; }
 [Ff][Oo][Rr]                                 { pos += yyleng; printf("FOR\n"); return yFOR; }
 [Ww][Hh][Ii][Ll][Ee]                         { pos += yyleng; printf("WHILE\n"); return yWHILE; }
@@ -27,13 +26,6 @@
 "("                                          { pos += yyleng; printf("OP\n"); return yOP; }
 ")"                                          { pos += yyleng; printf("CP\n"); return yCP; }
 [a-zA-Z][a-zA-Z0-9]*                         { pos += yyleng; printf("IDENTIFIER = %s\n", yytext); yylval.str = strdup(yytext); return yIDENTIFIER; }
-0|([1-9][0-9]*)                              {
-                                                 yylval.num = yytext[0] - '0';
-                                                 int i;
-                                                 for (i = 1; i < yyleng; i++) { yylval.num = yylval.num*10 + (yytext[i] - '0'); } 
-                                                 printf("NUMBER = %d\n", yylval.num); 
-                                                 return yNUMBER;
-                                             }
 ;                                            { printf("SEMICOLON\n"); return ySEMICOLON; }
 \n                                           { pos = 0; }
 " "                                          { pos++; }
