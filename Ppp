@@ -1,8 +1,8 @@
 %%
-[Cc][Oo][Uu][Nn][Tt]                         { pos += yyleng; printf("COUNT\n"); return yCOUNT; }
+[Cc][Oo][Uu][Nn][Tt]                         { pos += yyleng; printf("DELETE\n"); return yDELETE; }
 [Ff][Oo][Rr]                                 { pos += yyleng; printf("FOR\n"); return yFOR; }
 [Ww][Hh][Ii][Ll][Ee]                         { pos += yyleng; printf("WHILE\n"); return yWHILE; }
-[Tt][Oo]                                     { pos += yyleng; printf("TO\n"); return yTO; }
+[Ii][Nn]                                     { pos += yyleng; printf("TO\n"); return yTO; }
 [Nn][Oo][Oo][Pp][Tt][Ii][Mm][Ii][Zz][Ee]     { pos += yyleng; printf("NOOPTIMIZE\n"); return yNOOPTIMIZE; }
 [Aa][Ll][Ll]                                 { pos += yyleng; printf("ALL\n"); return yALL; }
 [Nn][Ee][Xx][Tt]                             { pos += yyleng; printf("NEXT\n"); return yNEXT; }
